@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Listo</title>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="nav">hi</div>
+
+
+      <div class="folders">Folders
+        <button id="folderButton" class="button">Add New Folder</button>
+      </div>
+
+      <div id="noteContainer" class="notes">
+
+        <div id="noteHeader">Inbox
+          <button id="noteButton" class="button">Add New Note</button>
+        </div>
+
+        <div id="noteList"></div>
+
+        <div id="noteFormModal">
+          <div id="noteFormContainer">Add a new note
+            <form>
+              <label for="newNote"></label>
+              <input type="text" id="newNote" name="newNote">
+              <button id="addNoteButton">+</button>
+              <button>Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
