@@ -11,8 +11,6 @@ export const noteModule = (() => {
     }
     
     const pushNewNote = (note) => {
-        // let note = document.getElementById("note").value;
-
         let newNote = Note(note);
         notes.push(newNote.title)
         console.log(notes);
