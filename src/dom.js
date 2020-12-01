@@ -2,34 +2,32 @@ import {noteModule} from './note'
 
 export const domModule = (() => {
 
-    const addNoteButton = () => {
+    const createNewNoteButton = () => {
+        let noteList = document.querySelector("#noteList");
+
         document.querySelector('#addNoteButton').addEventListener('click', e => {
             e.preventDefault();
             let note = document.getElementById("newNote").value;
 
+                let newNoteContainer = document.createElement('div')
+                newNoteContainer.classList.add("newNoteContainer");
+                newNoteContainer.append(createCheckBox(), createNote(note))
+                noteList.append(newNoteContainer)
+
             noteModule.pushNewNote(note);
-            displayNewNote(note)
             hideNoteForm();
         })
     }
 
-    const displayNewNote = (note) => {
-        let noteList = document.querySelector("#noteList");
-        let newNoteContainer = document.createElement('div')
-        newNoteContainer.classList.add("noteDiv");
+    const createCheckBox = () => {
         const emptyCircle = document.createElement('img');
-
         emptyCircle.src = "images/circle.svg"
-        emptyCircle.setAttribute('class', 'emptyCircle')
-        emptyCircle.addEventListener('click', () => {
-            console.log('ghey');
-        })
+        emptyCircle.setAttribute('class', 'emptyCircle');
 
-        newNoteContainer.append(emptyCircle, createNewNote(note))
-        noteList.append(newNoteContainer);
+        return emptyCircle
     }
 
-    const createNewNote = (note) => {
+    const createNote = (note) => {
         let newNote = document.createElement('p');
         newNote.classList.add('Note')
         newNote.textContent = `${note}`;
@@ -55,5 +53,5 @@ export const domModule = (() => {
         newForm.reset();
     }
     
-    return {displayNoteForm, addNoteButton, closeNoteForm}
+    return {displayNoteForm, createNewNoteButton, closeNoteForm}
 })();

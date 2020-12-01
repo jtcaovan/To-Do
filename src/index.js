@@ -4,5 +4,5 @@ import {noteModule} from './note';
 import {folderModule} from './folder';
 
 domModule.displayNoteForm();
-domModule.addNoteButton();
+domModule.createNewNoteButton();
 domModule.closeNoteForm();
