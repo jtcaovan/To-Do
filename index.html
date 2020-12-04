@@ -7,7 +7,7 @@
   <body>
     <div class="grid-container">
       <div class="nav">ListoMania</div>
-      <div class="folders">Folders
+      <div class="folders">
         <div id="folderContainer">
           <ul>
             <li>All</li>
@@ -20,21 +20,22 @@
         </div>
       </div>
       
-      <div id="noteContainer" class="notes">
-        <div id="noteHeader">Inbox
-          <button id="noteButton" class="button">Add New Note</button>
-        </div>
-        <div id="noteList"></div>
-
-
-
-          <div id="noteFormContainer">Add a new note
+      <div class="notes">
+        <div id="noteContainer">
+          <div id="noteHeader">
+            <button id="noteButton" class="button">Add New Note</button>
+          </div>
+          <div id="noteList"></div>
+          <div id="noteFormContainer">
+            <p>Add a new note!</p>
             <form id="newForm">
               <label for="newNote"></label>
               <input type="text" id="newNote" name="newNote">
               <button id="addNoteButton">+</button>
               <button id="closeNoteForm">Cancel</button>
             </form>
+          </div>
+          <div id="completedNoteList"></div>
           </div>
         </div>
     </div>
