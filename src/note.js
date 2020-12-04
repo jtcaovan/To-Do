@@ -13,8 +13,16 @@ export const noteModule = (() => {
     const pushNewNote = (note) => {
         let newNote = Note(note);
         notes.push(newNote.title)
+
         console.log(notes);
     }
 
-    return {pushNewNote, notes}
+    // const removeNote = (note) => {
+    //     let removeNote = note
+    //     notes.splice(removeNote, 1)
+
+    //     console.log(notes)
+    // }
+
+    return {pushNewNote}
 })();

@@ -9,13 +9,31 @@ export const domModule = (() => {
             e.preventDefault();
             let note = document.getElementById("newNote").value;
 
-                let newNoteContainer = document.createElement('div')
-                newNoteContainer.classList.add("newNoteContainer");
-                newNoteContainer.append(createCheckBox(), createNote(note))
-                noteList.append(newNoteContainer)
-
+            createNoteContainer(noteList,note);
             noteModule.pushNewNote(note);
             hideNoteForm();
+        })
+    }
+
+    const createNoteContainer = (noteList, note) => {
+        let noteContainer = document.createElement('div')
+        noteContainer.classList.add("newNoteContainer");
+        let checkBox = createCheckBox()
+
+        noteContainer.append(checkBox,createNote(note))
+        noteList.append(noteContainer)
+        markNoteAsComplete(checkBox, noteContainer, note)
+    }
+
+    const markNoteAsComplete = (checkBox, noteContainer, note) => {
+        let completedNoteList = document.getElementById('completedNoteList')
+
+        checkBox.addEventListener('click', () => {
+            checkBox.classList.add('scale-in-center','checkBox');
+            noteContainer.classList.add('completedNote')
+
+            completedNoteList.prepend(noteContainer);
+            // noteModule.removeNote(note);
         })
     }
 
@@ -45,6 +63,7 @@ export const domModule = (() => {
     const displayNoteForm = () => {
         document.querySelector('#noteButton').addEventListener('click', () => {
             document.querySelector('#noteFormContainer').style.display = 'block';
+            document.getElementById('newNote').focus();
         })
     }
 
