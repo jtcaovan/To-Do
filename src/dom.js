@@ -22,19 +22,38 @@ export const domModule = (() => {
 
         noteContainer.append(checkBox,createNote(note))
         noteList.append(noteContainer)
-        markNoteAsComplete(checkBox, noteContainer, note)
+        markNoteAsComplete(checkBox, noteContainer, noteList)
     }
 
-    const markNoteAsComplete = (checkBox, noteContainer, note) => {
+    const markNoteAsComplete = (checkBox, noteContainer, noteList) => {
         let completedNoteList = document.getElementById('completedNoteList')
 
-        checkBox.addEventListener('click', () => {
-            checkBox.classList.add('scale-in-center','checkBox');
-            noteContainer.classList.add('completedNote')
+        checkBox.addEventListener('click', e => {
+            if (e.target.parentNode.parentNode === noteList) {
+                checkBox.classList.add('scale-in-center','checkedBox');
+                checkBox.classList.remove('emptyCircle')
+                noteContainer.classList.add('completedNote');
+                noteContainer.classList.remove('newNoteContainer');
+                noteContainer.append(createDeleteNote());
 
-            completedNoteList.prepend(noteContainer);
-            // noteModule.removeNote(note);
+                completedNoteList.prepend(noteContainer);
+            } else {
+                checkBox.classList.add('emptyCircle');
+                checkBox.classList.remove('checkedBox');
+                noteContainer.classList.add('newNoteContainer');
+                noteContainer.classList.remove('completedNote');
+
+                noteList.append(noteContainer)
+            }
         })
+    }
+
+    const createDeleteNote = () => {
+        const deleteNote = document.createElement('img');
+        deleteNote.src = "images/x-mark.svg"
+        deleteNote.setAttribute('class', 'deleteNote');
+        
+        return deleteNote
     }
 
     const createCheckBox = () => {
@@ -61,10 +80,17 @@ export const domModule = (() => {
     }
 
     const displayNoteForm = () => {
-        document.querySelector('#noteButton').addEventListener('click', () => {
-            document.querySelector('#noteFormContainer').style.display = 'block';
-            document.getElementById('newNote').focus();
+        document.querySelector('#noteButton').addEventListener('click', formEvent);
+
+        window.addEventListener('keypress', (event) => {
+            if (event.code === 'Enter') 
+                formEvent();
         })
+    }
+
+    const formEvent = () => {
+        document.querySelector('#noteFormContainer').style.display = 'block';
+        document.getElementById('newNote').focus();
     }
 
     const hideNoteForm = () => {

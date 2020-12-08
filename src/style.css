@@ -66,11 +66,19 @@ body {
 .newNoteContainer {
   display: flex;
   padding-top: 25px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
 }
 
-.newNoteContainer:hover{
-  opacity: 0.7;
+.completedNote {
+  display: flex;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+  color: gray;
+  text-decoration: line-through;
 }
+
 
 .emptyCircle {
   height: 20px;
@@ -83,18 +91,22 @@ body {
   color: gray;
 }
 
-.completedNote {
-  color: gray;
-  text-decoration: line-through;
-}
-
-.checkBox {
+.checkedBox {
+  height: 20px;
+  width: 20px;
   background: url('././././././images/check.svg');
   filter: invert(52%) sepia(0%) saturate(2%) hue-rotate(173deg) brightness(96%) contrast(89%);
 }
 
-.checkBox:hover {
-  opacity: 0.2;
+.checkedBox:hover {
+  filter: saturate(100%) brightness(0);
+}
+
+.deleteNote {
+  height: 20px;
+  width: 20px;
+  margin-left: auto;
+  filter: invert(52%) sepia(0%) saturate(2%) hue-rotate(173deg) brightness(96%) contrast(89%);
 }
 
 .scale-in-center {
