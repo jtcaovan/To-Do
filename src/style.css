@@ -63,18 +63,18 @@ body {
   margin: auto 20px;
 }
 
-.newNoteContainer {
+.noteDiv {
   display: flex;
   padding-top: 25px;
   padding-bottom: 10px;
   border-bottom: 1px solid gray;
 }
 
+.newNoteContainer {
+  color: black
+}
+
 .completedNote {
-  display: flex;
-  padding-top: 25px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid gray;
   color: gray;
   text-decoration: line-through;
 }
@@ -103,10 +103,25 @@ body {
 }
 
 .deleteNote {
+  display: none;
+  height: 20px;
+  width: 20px;
+  filter: invert(52%) sepia(0%) saturate(2%) hue-rotate(173deg) brightness(96%) contrast(89%);
+}
+
+.deleteNote:hover {
+  filter: saturate(100%) brightness(0);
+}
+
+.editIcon {
+  display: none;
   height: 20px;
   width: 20px;
   margin-left: auto;
-  filter: invert(52%) sepia(0%) saturate(2%) hue-rotate(173deg) brightness(96%) contrast(89%);
+}
+
+.editIcon:hover {
+  color: blue;
 }
 
 .scale-in-center {

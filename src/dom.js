@@ -9,56 +9,85 @@ export const domModule = (() => {
             e.preventDefault();
             let note = document.getElementById("newNote").value;
 
-            createNoteContainer(noteList,note);
+            createNoteDiv(noteList,note);
             noteModule.pushNewNote(note);
             hideNoteForm();
         })
     }
 
-    const createNoteContainer = (noteList, note) => {
-        let noteContainer = document.createElement('div')
-        noteContainer.classList.add("newNoteContainer");
+    const createNoteDiv = (noteList, note) => {
+        let noteDiv = document.createElement('div')
+        noteDiv.classList.add("noteDiv");
         let checkBox = createCheckBox()
 
-        noteContainer.append(checkBox,createNote(note))
-        noteList.append(noteContainer)
-        markNoteAsComplete(checkBox, noteContainer, noteList)
+        noteDiv.append(checkBox,createNote(note))
+        noteList.append(noteDiv)
+
+        showNoteDetails(noteDiv);
+        markNoteAsComplete(checkBox, noteDiv, noteList)
     }
 
-    const markNoteAsComplete = (checkBox, noteContainer, noteList) => {
+    const markNoteAsComplete = (checkBox, noteDiv, noteList) => {
         let completedNoteList = document.getElementById('completedNoteList')
 
         checkBox.addEventListener('click', e => {
             if (e.target.parentNode.parentNode === noteList) {
                 checkBox.classList.add('scale-in-center','checkedBox');
                 checkBox.classList.remove('emptyCircle')
-                noteContainer.classList.add('completedNote');
-                noteContainer.classList.remove('newNoteContainer');
-                noteContainer.append(createDeleteNote());
-
-                completedNoteList.prepend(noteContainer);
+                noteDiv.classList.add('completedNote');
+                completedNoteList.prepend(noteDiv);
             } else {
                 checkBox.classList.add('emptyCircle');
                 checkBox.classList.remove('checkedBox');
-                noteContainer.classList.add('newNoteContainer');
-                noteContainer.classList.remove('completedNote');
-
-                noteList.append(noteContainer)
+                noteDiv.classList.remove('completedNote');
+                noteList.append(noteDiv)
             }
         })
     }
 
-    const createDeleteNote = () => {
+
+    const showNoteDetails = (noteDiv) => {
+        let editIcon = createEditIcon();
+        let deleteIcon = createDeleteIcon();
+
+        noteDiv.append(editIcon, deleteIcon);
+
+        noteDiv.addEventListener('mouseover', () => {
+            editIcon.style.display = 'block';
+        })
+        noteDiv.addEventListener('mouseout', () => {
+            editIcon.style.display = 'none';
+        })
+
+        noteDiv.addEventListener('mouseover', () => {
+            deleteIcon.style.display = 'block';
+        })
+        noteDiv.addEventListener('mouseout', () => {
+            deleteIcon.style.display = 'none';
+        })
+
+    }
+
+    const createEditIcon = () => {
+        const editIcon = document.createElement('img');
+        editIcon.src = 'images/edit.svg';
+        editIcon.setAttribute('class', 'editIcon')
+
+        return editIcon
+    }
+
+
+    const createDeleteIcon = () => {
         const deleteNote = document.createElement('img');
-        deleteNote.src = "images/x-mark.svg"
+        deleteNote.src = "images/trash.svg"
         deleteNote.setAttribute('class', 'deleteNote');
-        
+
         return deleteNote
     }
 
     const createCheckBox = () => {
         const emptyCircle = document.createElement('img');
-        emptyCircle.src = "images/circle.svg"
+        emptyCircle.src = "images/circle.svg";
         emptyCircle.setAttribute('class', 'emptyCircle');
 
         return emptyCircle
