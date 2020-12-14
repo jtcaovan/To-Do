@@ -4,11 +4,13 @@ html {
 
 body {
   height: 100%;
+  margin: 0;
 }
 
 .grid-container {
   display: grid;
   height: 100%;
+  width: 100%;
   grid-template-columns: 0.4fr 1.6fr;
   grid-template-rows: 0.2fr 1.8fr 1fr;
   gap: 0px 0px;
@@ -20,14 +22,33 @@ body {
 
 .nav { 
   grid-area: nav;
+  height: 55px;
+  overflow: hidden;
+ }
+
+ #navContainer {
+  display: flex;
+  align-items: center;
+  background-color: #203647;
+  color: #EEFBFB;
   height: 100%;
-  color: #ffffff;
-  background-color: #85dcb8 ;
+ }
+
+ #logo {
+   margin: 15px;
+   height: 50px;
+   width: 50px;
+ }
+
+ h1 {
+   font-size: 28px;
  }
 
 .folders {
   grid-area: folders;
+  height: 100%;
   background-color: #FAFAFA ;
+  overflow: hidden;
 }
 
 #folderContainer {
@@ -39,7 +60,12 @@ body {
 
 .notes { 
   grid-area: notes;
+  overflow: auto;
  }
+
+h2 {
+  color: #12232E;
+}
 
 #noteContainer {
   position: relative;
@@ -53,10 +79,37 @@ body {
    flex-direction: column;
  }
 
-#noteFormContainer {
-  display: none;
-  margin: auto;
-  border: 1px solid black;
+#newNote {
+  background: url('././././././images/add.svg');
+  background-repeat: no-repeat;
+  background-size: 17px;
+  background-position: left;
+  padding-left: 40px;
+  font-size: 16px;
+  box-sizing: border-box;
+  height: 45px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid gray;
+}
+
+#newNote:hover::placeholder {
+  color:#12232E
+}
+
+#newNote:focus::placeholder {
+  color:#12232E
+}
+
+#newNote:hover {
+  background-color: #EEFBFB;
+  border-radius: 10px;
+}
+
+#newNote:focus {
+  background-color: #EEFBFB;
+  border-radius: 10px;
+  outline: none;
 }
 
 .Note {
@@ -65,7 +118,9 @@ body {
 
 .noteDiv {
   display: flex;
-  padding-top: 25px;
+  height: 35px;
+  align-items: center;
+  padding-top: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid gray;
 }
@@ -81,8 +136,8 @@ body {
 
 
 .emptyCircle {
-  height: 20px;
-  width: 20px;
+  height: 22px;
+  width: 22px;
 }
 
 .emptyCircle:hover {
@@ -92,8 +147,8 @@ body {
 }
 
 .checkedBox {
-  height: 20px;
-  width: 20px;
+  height: 22px;
+  width: 22px;
   background: url('././././././images/check.svg');
   filter: invert(52%) sepia(0%) saturate(2%) hue-rotate(173deg) brightness(96%) contrast(89%);
 }
@@ -102,26 +157,28 @@ body {
   filter: saturate(100%) brightness(0);
 }
 
-.deleteNote {
+.deleteIcon {
   display: none;
-  height: 20px;
-  width: 20px;
+  padding-left: 6px;
+  height: 22px;
+  width: 22px;
   filter: invert(52%) sepia(0%) saturate(2%) hue-rotate(173deg) brightness(96%) contrast(89%);
 }
 
-.deleteNote:hover {
-  filter: saturate(100%) brightness(0);
+.deleteIcon:hover {
+  filter: invert(31%) sepia(96%) saturate(5922%) hue-rotate(353deg) brightness(104%) contrast(140%);
 }
 
 .editIcon {
   display: none;
-  height: 20px;
-  width: 20px;
+  height: 22px;
+  width: 22px;
   margin-left: auto;
+  filter: invert(52%) sepia(0%) saturate(2%) hue-rotate(173deg) brightness(96%) contrast(89%);
 }
 
 .editIcon:hover {
-  color: blue;
+  filter: saturate(100%) brightness(0);
 }
 
 .scale-in-center {

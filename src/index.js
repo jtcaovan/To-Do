@@ -3,6 +3,4 @@ import {domModule} from './dom';
 import {noteModule} from './note';
 import {folderModule} from './folder';
 
-domModule.displayNoteForm();
 domModule.createNewNoteButton();
-domModule.closeNoteForm();

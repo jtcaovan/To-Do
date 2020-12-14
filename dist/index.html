@@ -6,7 +6,12 @@
   </head>
   <body>
     <div class="grid-container">
-      <div class="nav">ListoMania</div>
+      <div class="nav">
+        <div id="navContainer">
+          <img src="images/checked.svg" alt="Check Logo" id="logo">
+          <h1>Check'd</h1>   
+        </div>   
+      </div>
       <div class="folders">
         <div id="folderContainer">
           <ul>
@@ -24,19 +29,13 @@
         
         <div id="noteContainer">
           <div id="noteHeader">
-            <button id="noteButton" class="button">Add New Note</button>
-          </div>
-          <div id="noteList"></div>
-
-          <div id="noteFormContainer">
-            <p>Add a new note!</p>
+            <h2>Folder Name</h2>
             <form id="newForm">
               <label for="newNote"></label>
-              <input type="text" id="newNote" name="newNote">
-              <button id="addNoteButton">+</button>
-              <button id="closeNoteForm">Cancel</button>
+              <input type="text" id="newNote" name="newNote" placeholder="Add Task..." autocomplete="off">
             </form>
           </div>
+          <div id="noteList"></div>
           <div id="completedNoteList"></div>
           </div>
         </div>

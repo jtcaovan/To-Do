@@ -5,13 +5,15 @@ export const domModule = (() => {
     const createNewNoteButton = () => {
         let noteList = document.querySelector("#noteList");
 
-        document.querySelector('#addNoteButton').addEventListener('click', e => {
-            e.preventDefault();
-            let note = document.getElementById("newNote").value;
-
-            createNoteDiv(noteList,note);
-            noteModule.pushNewNote(note);
-            hideNoteForm();
+        document.querySelector('#newForm').addEventListener('keypress', e => {
+            if (e.code === 'Enter') {
+                e.preventDefault();
+                let note = document.getElementById("newNote").value;
+    
+                createNoteDiv(noteList,note);
+                noteModule.pushNewNote(note);
+                clearForm();
+            }
         })
     }
 
@@ -23,8 +25,8 @@ export const domModule = (() => {
         noteDiv.append(checkBox,createNote(note))
         noteList.append(noteDiv)
 
-        showNoteDetails(noteDiv);
         markNoteAsComplete(checkBox, noteDiv, noteList)
+        showNoteIcons(noteDiv);
     }
 
     const markNoteAsComplete = (checkBox, noteDiv, noteList) => {
@@ -33,37 +35,32 @@ export const domModule = (() => {
         checkBox.addEventListener('click', e => {
             if (e.target.parentNode.parentNode === noteList) {
                 checkBox.classList.add('scale-in-center','checkedBox');
-                checkBox.classList.remove('emptyCircle')
+                checkBox.classList.remove('emptyCircle');
                 noteDiv.classList.add('completedNote');
                 completedNoteList.prepend(noteDiv);
             } else {
                 checkBox.classList.add('emptyCircle');
                 checkBox.classList.remove('checkedBox');
                 noteDiv.classList.remove('completedNote');
-                noteList.append(noteDiv)
+                noteList.append(noteDiv);
             }
         })
     }
 
 
-    const showNoteDetails = (noteDiv) => {
+    const showNoteIcons = (noteDiv) => {
         let editIcon = createEditIcon();
         let deleteIcon = createDeleteIcon();
 
         noteDiv.append(editIcon, deleteIcon);
 
-        noteDiv.addEventListener('mouseover', () => {
+        noteDiv.addEventListener('mouseover', e => {
+            deleteIcon.style.display = 'block';
             editIcon.style.display = 'block';
         })
         noteDiv.addEventListener('mouseout', () => {
-            editIcon.style.display = 'none';
-        })
-
-        noteDiv.addEventListener('mouseover', () => {
-            deleteIcon.style.display = 'block';
-        })
-        noteDiv.addEventListener('mouseout', () => {
             deleteIcon.style.display = 'none';
+            editIcon.style.display = 'none';
         })
 
     }
@@ -76,13 +73,20 @@ export const domModule = (() => {
         return editIcon
     }
 
-
     const createDeleteIcon = () => {
-        const deleteNote = document.createElement('img');
-        deleteNote.src = "images/trash.svg"
-        deleteNote.setAttribute('class', 'deleteNote');
+        const deleteIcon = document.createElement('img');
+        deleteIcon.src = "images/trash-can.svg"
+        deleteIcon.setAttribute('class', 'deleteIcon');
 
-        return deleteNote
+        deleteNote(deleteIcon);
+
+        return deleteIcon
+    }
+
+    const deleteNote = (deleteIcon) => {
+        deleteIcon.addEventListener('click', e => {
+            e.target.parentNode.remove();
+        })
     }
 
     const createCheckBox = () => {
@@ -101,31 +105,9 @@ export const domModule = (() => {
         return newNote
     }
 
-    const closeNoteForm = () => {
-        document.querySelector('#closeNoteForm').addEventListener('click', e => {
-            e.preventDefault();
-            hideNoteForm();
-        })
-    }
-
-    const displayNoteForm = () => {
-        document.querySelector('#noteButton').addEventListener('click', formEvent);
-
-        window.addEventListener('keypress', (event) => {
-            if (event.code === 'Enter') 
-                formEvent();
-        })
-    }
-
-    const formEvent = () => {
-        document.querySelector('#noteFormContainer').style.display = 'block';
-        document.getElementById('newNote').focus();
-    }
-
-    const hideNoteForm = () => {
-        document.querySelector('#noteFormContainer').style.display = 'none';
+    const clearForm = () => {
         newForm.reset();
     }
     
-    return {displayNoteForm, createNewNoteButton, closeNoteForm}
+    return {createNewNoteButton}
 })();
